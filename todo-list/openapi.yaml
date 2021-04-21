@@ -16,6 +16,23 @@ paths:
                   $ref: '#/components/examples/task-list'
     post:
       summary: Create Task
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [title, status]
+              properties:
+                title:
+                  $ref: '#/components/schemas/title'
+                status:
+                  $ref: '#/components/schemas/status'
+                dueDate:
+                  $ref: '#/components/schemas/dueDate'
+            example:
+              title: Do the laundry
+              status: todo
       responses:
         '200':
           description: OK
@@ -49,6 +66,41 @@ paths:
           description: Not Found
     patch:
       summary: Update Task
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              oneOf:
+                - description: Schema for advance/regress
+                  required: [status]
+                  properties:
+                    status:
+                      $ref: '#/components/schemas/status'
+                - description: Schema for an edit
+                  properties:
+                    title:
+                      $ref: '#/components/schemas/title'
+                    dueDate:
+                      $ref: '#/components/schemas/dueDate'
+                  oneOf:
+                    - required: [title]
+                    - required: [dueDate]
+            examples:
+              status-update:
+                summary: Status Update
+                description:
+                  Example of a request body for an `advance` action submission
+                value:
+                  status: complete
+              dueDate-update:
+                summary: Due Date Update
+                description:
+                  Example of a request body for an `edit` action submission
+                value:
+                  dueDate: '2021-05-01'
       responses:
         '200':
           description: OK
@@ -120,8 +172,7 @@ components:
             href: http://localhost:3000/profile
     todo-task:
       summary: To-Do Task
-      description:
-        Example of a `todo` task. Can be marked as in progress and updated.
+      description: Example of a `todo` task. Can be marked as in progress and updated.
       value:
         class: [task]
         title: Task 3
@@ -245,3 +296,15 @@ components:
             title: Back to To-Do List
           - rel: [profile]
             href: http://localhost:3000/profile#task
+  schemas:
+    dueDate:
+      type: string
+      format: date
+    status:
+      enum:
+        - todo
+        - inprogress
+        - complete
+    title:
+      type: string
+      pattern: \S+
