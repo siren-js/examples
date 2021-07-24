@@ -139,7 +139,7 @@ components:
           - name: create
             title: Create Task
             method: POST
-            href: http://localhost:3000/todos
+            href: http://localhost:3000/tasks
             fields:
               - name: title
                 pattern: \S+
