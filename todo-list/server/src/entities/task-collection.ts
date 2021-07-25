@@ -1,5 +1,5 @@
 import { Action, EmbeddedLink, Entity } from '@siren-js/core';
-import Task from '../types/task';
+import Task from '../models/task';
 import config from '../config';
 
 export default function create(tasks: Task[]) {

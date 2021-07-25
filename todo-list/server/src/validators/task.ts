@@ -1,6 +1,6 @@
 import { isRecord } from '@siren-js/core/dist/util/type-guard';
 import { InvalidStatusChangeError } from '../errors';
-import Task, { TaskStatus } from '../types/task';
+import Task, { TaskStatus } from '../models/task';
 
 export function validateCreatePayload(value: unknown): Task {
   if (!isRecord(value)) {

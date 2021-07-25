@@ -2,7 +2,7 @@ import * as Siren from '@siren-js/core';
 import _ from 'lodash';
 
 import config from '../config';
-import Task, { TaskStatus } from '../types/task';
+import Task, { TaskStatus } from '../models/task';
 
 export default function create(id: number, task: Task): Siren.Entity {
   const actions: Siren.Action[] = [];

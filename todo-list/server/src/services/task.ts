@@ -1,6 +1,6 @@
 import db from '../db';
 import { TaskNotFoundError } from '../errors';
-import Task from '../types/task';
+import Task from '../models/task';
 
 export function create(task: Task): number {
   return db.task.save(task);
