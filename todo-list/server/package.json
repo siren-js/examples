@@ -1,6 +1,6 @@
 {
   "name": "todo-list-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Example server for a simple To-Do List Siren API",
   "private": true,
   "main": "index.js",
