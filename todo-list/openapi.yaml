@@ -1,0 +1,310 @@
+openapi: 3.0.3
+info:
+  title: To-Do List API
+  version: 1.0.0
+paths:
+  /tasks:
+    get:
+      summary: List Tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.siren+json:
+              examples:
+                task-list:
+                  $ref: '#/components/examples/task-list'
+    post:
+      summary: Create Task
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [title, status]
+              properties:
+                title:
+                  $ref: '#/components/schemas/title'
+                status:
+                  $ref: '#/components/schemas/status'
+                dueDate:
+                  $ref: '#/components/schemas/dueDate'
+            example:
+              title: Do the laundry
+              status: todo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.siren+json:
+              examples:
+                todo-task:
+                  $ref: '#/components/examples/todo-task'
+                inprogress-task:
+                  $ref: '#/components/examples/inprogress-task'
+                complete-task:
+                  $ref: '#/components/examples/complete-task'
+        '400':
+          description: Bad Request
+  /tasks/{id}:
+    get:
+      summary: Get Task
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.siren+json:
+              examples:
+                todo-task:
+                  $ref: '#/components/examples/todo-task'
+                inprogress-task:
+                  $ref: '#/components/examples/inprogress-task'
+                complete-task:
+                  $ref: '#/components/examples/complete-task'
+        '404':
+          description: Not Found
+    patch:
+      summary: Update Task
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: false
+              oneOf:
+                - description: Schema for advance/regress
+                  required: [status]
+                  properties:
+                    status:
+                      $ref: '#/components/schemas/status'
+                - description: Schema for an edit
+                  properties:
+                    title:
+                      $ref: '#/components/schemas/title'
+                    dueDate:
+                      $ref: '#/components/schemas/dueDate'
+                  oneOf:
+                    - required: [title]
+                    - required: [dueDate]
+            examples:
+              status-update:
+                summary: Status Update
+                description:
+                  Example of a request body for an `advance` action submission
+                value:
+                  status: complete
+              dueDate-update:
+                summary: Due Date Update
+                description:
+                  Example of a request body for an `edit` action submission
+                value:
+                  dueDate: '2021-05-01'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.siren+json:
+              examples:
+                todo-task:
+                  $ref: '#/components/examples/todo-task'
+                inprogress-task:
+                  $ref: '#/components/examples/inprogress-task'
+                complete-task:
+                  $ref: '#/components/examples/complete-task'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      summary: Delete Task
+      responses:
+        '200':
+          description: OK
+          content:
+            application/vnd.siren+json:
+              examples:
+                task-list:
+                  $ref: '#/components/examples/task-list'
+        '404':
+          description: Not Found
+components:
+  examples:
+    task-list:
+      value:
+        class: [task, collection]
+        title: All Tasks
+        actions:
+          - name: create
+            title: Create Task
+            method: POST
+            href: http://localhost:3000/tasks
+            fields:
+              - name: title
+                pattern: \S+
+                required: true
+              - name: status
+                type: select
+                options:
+                  - title: To Do
+                    value: todo
+                    selected: true
+                  - title: In Progress
+                    value: inprogress
+                  - title: Complete
+                    value: complete
+              - name: dueDate
+                type: date
+        links:
+          - rel: [self]
+            href: http://localhost:3000/todos
+          - rel: [item]
+            href: http://localhost:3000/todos/2
+            title: Task 2
+          - rel: [item]
+            href: http://localhost:3000/todos/3
+            title: Task 3
+          - rel: [item]
+            href: http://localhost:3000/todos/1
+            title: Task 1
+          - rel: [profile]
+            href: http://localhost:3000/profile
+    todo-task:
+      summary: To-Do Task
+      description: Example of a `todo` task. Can be marked as in progress and updated.
+      value:
+        class: [task]
+        title: Task 3
+        properties:
+          title: Take a nap
+          status: To Do
+          dueDate: 2021-05-01
+        actions:
+          - name: advance
+            title: Mark as In Progress
+            method: PATCH
+            href: http://localhost:3000/tasks/3
+            fields:
+              - name: status
+                type: hidden
+                value: inprogress
+          - name: edit
+            title: Edit Task
+            method: PATCH
+            href: http://localhost:3000/tasks/3
+            fields:
+              - name: title
+                title: Title
+                pattern: \S+
+                required: true
+                value: Take a nap
+              - name: dueDate
+                title: Due Date
+                type: date
+                value: 2021-05-01
+        links:
+          - rel: [self]
+            href: http://localhost:3000/tasks/3
+          - rel: [previous]
+            href: http://localhost:3000/tasks/2
+          - rel: [collection]
+            href: http://localhost:3000/tasks
+            title: Back to To-Do List
+          - rel: [profile]
+            href: http://localhost:3000/profile#task
+    inprogress-task:
+      summary: In Progress Task
+      description:
+        Example of an `inprogress` task. Can be marked as `todo` or `complete`,
+        and updated.
+      value:
+        class: [task]
+        title: Task 2
+        properties:
+          title: Watch TV
+          status: In Progress
+        actions:
+          - name: regress
+            title: Mark as To Do
+            method: PATCH
+            href: http://localhost:3000/tasks/2
+            fields:
+              - name: status
+                type: hidden
+                value: todo
+          - name: advance
+            title: Mark as Complete
+            method: PATCH
+            href: http://localhost:3000/tasks/2
+            fields:
+              - name: status
+                type: hidden
+                value: complete
+          - name: edit
+            title: Edit Task
+            method: PATCH
+            href: http://localhost:3000/tasks/2
+            fields:
+              - name: title
+                title: Title
+                pattern: \S+
+                required: true
+                value: Watch TV
+              - name: dueDate
+                title: Due Date
+                type: date
+        links:
+          - rel: [self]
+            href: http://localhost:3000/tasks/2
+          - rel: [next]
+            href: http://localhost:3000/tasks/3
+          - rel: [previous]
+            href: http://localhost:3000/tasks/1
+          - rel: [collection]
+            href: http://localhost:3000/tasks
+            title: Back to To-Do List
+          - rel: [profile]
+            href: http://localhost:3000/profile#task
+    complete-task:
+      summary: Complete Task
+      description:
+        Example of a completed task. Can be moved back to in progress and cannot
+        be updated.
+      value:
+        class: [task]
+        title: Task 1
+        properties:
+          title: Eat breakfast
+          status: Complete
+        actions:
+          - name: regress
+            title: Mark as In Progress
+            method: PATCH
+            href: http://localhost:3000/tasks/1
+            fields:
+              - name: status
+                type: hidden
+                value: inprogress
+        links:
+          - rel: [self]
+            href: http://localhost:3000/tasks/1
+          - rel: [next]
+            href: http://localhost:3000/tasks/2
+          - rel: [collection]
+            href: http://localhost:3000/tasks
+            title: Back to To-Do List
+          - rel: [profile]
+            href: http://localhost:3000/profile#task
+  schemas:
+    dueDate:
+      type: string
+      format: date
+    status:
+      enum:
+        - todo
+        - inprogress
+        - complete
+    title:
+      type: string
+      pattern: \S+
