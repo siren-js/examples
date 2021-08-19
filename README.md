@@ -1,6 +1,5 @@
 # Siren.js Examples
 
-This repository contains example servers and clients using Siren.js. Check out
-the individual examples for more detail.
+This repository contains exemplar servers and clients implemented with and demonstrating Siren.js. Check out the individual examples for more detail.
 
 - [To-Do List](./todo-list)
