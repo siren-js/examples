@@ -12,6 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.use(helmet());
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useStaticAssets(join(__dirname, '..', 'public'), {
     extensions: ['xhtml']
