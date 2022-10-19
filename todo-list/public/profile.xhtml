@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>To-Do List API Profile</title>
+    <style type="text/css">
+      body {
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0 3rem;
+      }
+
+      dt {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+      }
+
+      dd {
+        padding-bottom: 0.25rem;
+      }
+
+      img {
+        padding-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>To-Do List API Profile</h1>
+    <p>
+      This document acts as the To-Do List API's
+      <a href="https://tools.ietf.org/html/rfc6906" target="_blank">profile</a>, describing its application semantics.
+    </p>
+    <p>The API allows for the programmatic management of <a href="#task">tasks</a>.</p>
+    <h3>Vocabulary</h3>
+    <p>
+      Terms used in this API are defined below using
+      <a href="https://gmpg.org/xmdp" target="_blank">XMDP</a>. Here are a few XPath expressions for utilizing this
+      vocabulary programmatically:
+    </p>
+    <ul>
+      <li><code>//dl[@class='profile']/dt</code> - All defined terms</li>
+      <li>
+        <code>//dl[@class='profile']/dt[@id='{term}']/following-sibling::dd[1]</code>
+        - Definition of a given <code>term</code>
+      </li>
+      <li>
+        <code>//dl[@class='profile']/dt[@id='status']/following-sibling::dd[1]/dl/dt</code>
+        - All possible values for the term
+        <a href="#status"><code>status</code></a>
+      </li>
+    </ul>
+    <dl class="profile">
+      <dt id="collection">collection</dt>
+      <dd>
+        When used as a link relation type, its definition matches the one in
+        <a href="https://tools.ietf.org/html/rfc6573#section-2.2" target="_blank">Section 2.2 of RFC 6573</a>. When used
+        as a representation classifier, describes a collection of items.
+      </dd>
+      <dt id="complete">complete</dt>
+      <dd>Boolean flag indicating whether a <a href="#task">task</a> has been completed.</dd>
+      <dt id="create">create</dt>
+      <dd>Identifies the hypermedia control for creating a <a href="#task">task</a>.</dd>
+      <dt id="dueDate">dueDate</dt>
+      <dd>
+        The date a <a href="#task">task</a> is due, represented as a
+        <a href="https://tools.ietf.org/html/rfc3339#section-5.6" target="_blank"><code>full-date</code></a
+        >.
+      </dd>
+      <dt id="edit">edit</dt>
+      <dd>
+        Identifies the hypermedia control for updating a <a href="#task">task</a>.
+        <a href="#complete">Completed</a> tasks cannot be updated.
+      </dd>
+      <dt id="delete">delete</dt>
+      <dd>Identifies the hypermedia control for deleting a <a href="#task">task</a>.</dd>
+      <dt id="task">task</dt>
+      <dd>Work to be done.</dd>
+      <dt id="toggle-complete">toggle-complete</dt>
+      <dd>
+        Identifies the hypermedia control for toggling a <a href="#task">task</a>'s
+        <a href="#complete"><code>complete</code></a> flag.
+      </dd>
+      <dt id="title">title</dt>
+      <dd>Human-readable text labeling a <a href="#task">task</a>.</dd>
+    </dl>
+    <p>
+      The following link relations are borrowed from the
+      <a href="https://www.iana.org/assignments/link-relations" target="_blank">IANA registry</a>:
+    </p>
+    <ul>
+      <li>collection</li>
+      <li>item</li>
+      <li>next</li>
+      <li>previous</li>
+      <li>self</li>
+    </ul>
+    <h3>Extensions</h3>
+    <p>
+      <a href="https://github.com/kevinswiber/siren" target="_blank">Siren</a>
+      representations served by this API utilize extensions defined
+      <a href="https://github.com/siren-js/spec-extensions" target="_blank">here</a>.
+    </p>
+  </body>
+</html>

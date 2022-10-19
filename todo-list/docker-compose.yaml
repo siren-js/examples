@@ -1,0 +1,10 @@
+services:
+  postgres:
+    container_name: todo-list-db
+    image: postgres:14
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: todo-list
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
