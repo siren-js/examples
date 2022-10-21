@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as Siren from '@siren-js/core';
 
-import toDateString from '../common/toDateString';
 import { Task } from './model/task.entity';
 import { UrlProvider } from './url.provider';
 
@@ -19,8 +18,7 @@ export class TaskEntityFactory {
       title: task.title,
       properties: {
         title: task.title,
-        complete: task.complete,
-        dueDate: task.dueDate ? toDateString(task.dueDate) : undefined
+        complete: task.complete
       },
       links: [
         { rel: ['self'], href: this.urls.task(task.id) },
@@ -49,13 +47,6 @@ export class TaskEntityFactory {
           title: 'Title',
           pattern: '\\S+',
           value: task.title
-        },
-        {
-          name: 'dueDate',
-          title: 'Due Date',
-          type: 'date',
-          min: toDateString(new Date()),
-          value: task.dueDate ?? undefined
         }
       ]
     });

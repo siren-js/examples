@@ -11,9 +11,6 @@ export class Task {
   @Column({ default: false })
   complete: boolean;
 
-  @Column({ nullable: true })
-  dueDate?: Date;
-
   @CreateDateColumn()
   createdAt: Date;
 }

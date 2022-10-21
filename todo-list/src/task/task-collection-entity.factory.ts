@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as Siren from '@siren-js/core';
 
-import toDateString from '../common/toDateString';
 import { Task } from './model/task.entity';
 import { UrlProvider } from './url.provider';
 
@@ -38,12 +37,6 @@ export class TaskCollectionEntityFactory {
           title: 'Title',
           pattern: '\\S+',
           required: true
-        },
-        {
-          name: 'dueDate',
-          title: 'Due Date',
-          type: 'date',
-          min: toDateString(new Date())
         }
       ]
     };

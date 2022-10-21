@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { CreateTaskDto } from './model/create-task.dto';
@@ -9,12 +9,15 @@ import { UpdateTaskDto } from './model/update-task.dto';
 
 @Injectable()
 export class TaskService {
+  private readonly logger = new Logger(TaskService.name);
+
   constructor(
     @InjectRepository(Task)
     private readonly repository: Repository<Task>
   ) {}
 
   create(dto: CreateTaskDto) {
+    this.logger.log(`creating task ${dto.title}`);
     return this.repository.save(dto);
   }
 
@@ -31,11 +34,12 @@ export class TaskService {
   }
 
   async update(id: number, dto: UpdateTaskDto) {
-    await this.repository.save({ id, ...dto });
-    return this.findOne(id);
+    this.logger.log(`updating task ${id}`);
+    return this.repository.save({ id, ...dto }, { reload: true });
   }
 
   async remove(id: number) {
+    this.logger.log(`deleting task ${id}`);
     await this.repository.delete({ id });
   }
 }
