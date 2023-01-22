@@ -2,26 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>To-Do List API Profile</title>
-    <style type="text/css">
-      body {
-        margin: 0 auto;
-        max-width: 700px;
-        padding: 0 3rem;
-      }
-
-      dt {
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;
-      }
-
-      dd {
-        padding-bottom: 0.25rem;
-      }
-
-      img {
-        padding-top: 1rem;
-      }
-    </style>
+    <link rel="stylesheet" href="profile.css" />
   </head>
   <body>
     <h1>To-Do List API Profile</h1>
@@ -59,6 +40,8 @@
       <dd>Boolean flag indicating whether a <a href="#task">task</a> has been completed.</dd>
       <dt id="create">create</dt>
       <dd>Identifies the hypermedia control for creating a <a href="#task">task</a>.</dd>
+      <dt id="description">description</dt>
+      <dd>Human-readable text describing a <a href="#task">task</a>.</dd>
       <dt id="edit">edit</dt>
       <dd>
         Identifies the hypermedia control for updating a <a href="#task">task</a>.
@@ -73,8 +56,6 @@
         Identifies the hypermedia control for toggling a <a href="#task">task</a>'s
         <a href="#complete"><code>complete</code></a> flag.
       </dd>
-      <dt id="title">title</dt>
-      <dd>Human-readable text labeling a <a href="#task">task</a>.</dd>
     </dl>
     <p>
       The following link relations are borrowed from the

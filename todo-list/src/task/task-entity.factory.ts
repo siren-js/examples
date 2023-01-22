@@ -15,14 +15,15 @@ export class TaskEntityFactory {
     }
     return Siren.Entity.of({
       class: ['task'],
-      title: task.title,
+      title: `Task ${task.id}`,
       properties: {
-        title: task.title,
+        description: task.description,
         complete: task.complete
       },
       links: [
         { rel: ['self'], href: this.urls.task(task.id) },
-        { rel: ['collection'], href: this.urls.tasks }
+        { rel: ['collection', 'up'], href: this.urls.tasks },
+        { rel: ['profile'], href: this.urls.profile }
       ],
       actions
     });
@@ -43,10 +44,11 @@ export class TaskEntityFactory {
       href: this.urls.task(task.id),
       fields: [
         {
-          name: 'title',
-          title: 'Title',
+          name: 'description',
+          title: 'Description',
           pattern: '\\S+',
-          value: task.title
+          required: true,
+          value: task.description
         }
       ]
     });

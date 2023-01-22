@@ -17,7 +17,7 @@ export class TaskService {
   ) {}
 
   create(dto: CreateTaskDto) {
-    this.logger.log(`creating task ${dto.title}`);
+    this.logger.log(`creating task ${dto.description}`);
     return this.repository.save(dto);
   }
 
@@ -33,7 +33,7 @@ export class TaskService {
     return task;
   }
 
-  async update(id: number, dto: UpdateTaskDto) {
+  async update(id: number, dto: UpdateTaskDto): Promise<Task> {
     this.logger.log(`updating task ${id}`);
     return this.repository.save({ id, ...dto }, { reload: true });
   }

@@ -17,7 +17,7 @@ $ cp .env.example .env
 ## Running the app
 
 ```bash
-# start database
+# start database and admin console
 $ docker-compose up --detach
 
 # development
@@ -29,6 +29,8 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+The database admin console runs at <http://localhost:5433>. When connecting to the database via the admin console on macOS, use `host.docker.internal` as the Host name _and not_ `localhost`.
 
 ## Test
 

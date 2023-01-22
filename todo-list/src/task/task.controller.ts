@@ -17,11 +17,10 @@ import { UpdateTaskDto } from './model/update-task.dto';
 import { TaskCollectionInterceptor } from './task-collection.interceptor';
 import { TaskInterceptor } from './task.interceptor';
 import { TaskService } from './task.service';
-import { UrlProvider } from './url.provider';
 
 @Controller('tasks')
 export class TaskController {
-  constructor(private readonly service: TaskService, private readonly urls: UrlProvider) {}
+  constructor(private readonly service: TaskService) {}
 
   @Post()
   @UseInterceptors(TaskInterceptor)
@@ -49,7 +48,7 @@ export class TaskController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id', ParseIntPipe) id: number) {
-    this.service.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    await this.service.remove(id);
   }
 }

@@ -20,7 +20,8 @@ export class TaskCollectionEntityFactory {
       entities: tasks.map((task) => ({
         rel: ['item'],
         href: this.urls.task(task.id),
-        title: task.title
+        class: ['task'],
+        title: `Task ${task.id}`
       }))
     });
   }
@@ -33,10 +34,11 @@ export class TaskCollectionEntityFactory {
       href: this.urls.tasks,
       fields: [
         {
-          name: 'title',
-          title: 'Title',
+          name: 'description',
+          title: 'Description',
           pattern: '\\S+',
-          required: true
+          required: true,
+          placeholder: 'Describe the task'
         }
       ]
     };
