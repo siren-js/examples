@@ -6,11 +6,12 @@ import { AuthorController } from './author.controller';
 import { validate } from './config.schema';
 import { EchoController } from './echo.controller';
 import { ItemController } from './item.controller';
+import { UploadController } from './upload.controller';
 import { UrlProvider } from './url.provider';
 
 @Module({
   imports: [ConfigModule.forRoot({ expandVariables: true, isGlobal: true, validate })],
-  controllers: [AppController, AuthorController, EchoController, ItemController],
+  controllers: [AppController, AuthorController, EchoController, ItemController, UploadController],
   providers: [UrlProvider]
 })
 export class AppModule {}

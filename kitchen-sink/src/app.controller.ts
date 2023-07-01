@@ -25,6 +25,55 @@ export class AppController {
       ],
       actions: [
         {
+          name: 'drop-downs',
+          href: this.urls.echo,
+          title: 'Drop-downs',
+          fields: [
+            {
+              name: 'no-default',
+              type: 'radio',
+              options: [
+                { title: 'Gryffindor', value: 'g' },
+                { title: 'Hufflepuff', value: 'h' },
+                { title: 'Ravenclaw', value: 'r' },
+                { title: 'Slytherin', value: 's' }
+              ]
+            },
+            {
+              name: 'no-title',
+              type: 'radio',
+              options: [
+                { value: 'Gryffindor' },
+                { value: 'Hufflepuff' },
+                { value: 'Ravenclaw' },
+                { value: 'Slytherin' }
+              ]
+            },
+            {
+              name: 'default-from-list',
+              type: 'radio',
+              value: 'r',
+              options: [
+                { title: 'Gryffindor', value: 'g' },
+                { title: 'Hufflepuff', value: 'h' },
+                { title: 'Ravenclaw', value: 'r' },
+                { title: 'Slytherin', value: 's' }
+              ]
+            },
+            {
+              name: 'default-not-from-list',
+              type: 'radio',
+              value: 'd',
+              options: [
+                { title: 'Gryffindor', value: 'g' },
+                { title: 'Hufflepuff', value: 'h' },
+                { title: 'Ravenclaw', value: 'r' },
+                { title: 'Slytherin', value: 's' }
+              ]
+            }
+          ]
+        },
+        {
           name: 'echo-get',
           href: this.urls.echo,
           title: 'Echo GET',
@@ -41,7 +90,19 @@ export class AppController {
             { name: 'nextWeek', type: 'week' },
             { name: 'dinnerTime', type: 'time' },
             { name: 'midnight', type: 'date-time' },
-            { name: 'favoriteNumber', type: 'number' }
+            { name: 'favoriteNumber', type: 'number' },
+            {
+              name: 'hogwartsHouse',
+              type: 'radio',
+              options: [
+                { title: 'Gryffindor', value: 'gryffindor' },
+                { title: 'Hufflepuff', value: 'hufflepuff' },
+                { title: 'Ravenclaw', value: 'ravenclaw' },
+                { title: 'Slytherin', value: 'slytherin' }
+              ]
+            },
+            { name: 'avatar', type: 'file' },
+            { name: 'agree', type: 'checkbox', title: 'I agree to something' }
           ]
         },
         {
@@ -63,6 +124,13 @@ export class AppController {
             { name: 'midnight', type: 'date-time' },
             { name: 'favoriteNumber', type: 'number' }
           ]
+        },
+        {
+          name: 'upload-file',
+          method: 'POST',
+          href: this.urls.upload,
+          type: 'multipart/form-data',
+          fields: [{ name: 'logo', type: 'file' }]
         }
       ],
       entities: [

@@ -32,4 +32,8 @@ export class UrlProvider {
   item(id: number): string {
     return `${this.items}/${id}`;
   }
+
+  get upload(): string {
+    return `${this.baseUrl}/upload`;
+  }
 }
