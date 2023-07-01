@@ -1,0 +1,35 @@
+.title {
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+
+.button {
+  /* disable defaults */
+  border: none;
+  outline: none;
+
+  /* coloring */
+  background-color: hsl(22, 84%, 44%);
+  color: white;
+
+  /* sizing */
+  border-radius: 0.3rem;
+  font-size: 1.3rem;
+  min-width: 150px;
+  padding: 0.5rem;
+
+  /* animations */
+  transition: all 0.2s;
+}
+
+.button:hover,
+.button:focus {
+  background-color: hsl(22, 84%, 41%);
+  box-shadow: 1px 1px 5px hsl(22, 100%, 30%);
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.button:active {
+  background-color: hsl(22, 84%, 35%);
+}
