@@ -7,6 +7,7 @@ export class UrlProvider {
 
   readonly base = this.config.get<string>('BASE_URL');
   readonly cards = this.withBase('/cards');
+  readonly profile = this.withBase('/profile');
 
   card(id: number): string {
     return `${this.cards}/${id}`;

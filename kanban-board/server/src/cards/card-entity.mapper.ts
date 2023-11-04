@@ -20,6 +20,10 @@ export class CardEntityMapper {
           rel: ['self'],
           href: this.urlProvider.cards,
         },
+        {
+          rel: ['profile'],
+          href: this.urlProvider.profile,
+        },
       ],
       actions: [
         {
@@ -83,6 +87,10 @@ export class CardEntityMapper {
           rel: ['collection', 'up'],
           class: ['KanbanBoard'],
           href: this.urlProvider.cards,
+        },
+        {
+          rel: ['profile'],
+          href: this.urlProvider.profile,
         },
       ],
       actions,
