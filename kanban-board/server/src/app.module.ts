@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AppController } from './app.controller';
 import { CardsModule } from './cards/cards.module';
 import { validate } from './config.schema';
 import { TypeOrmConfigFactory } from './type-orm-config.factory';
@@ -15,7 +16,7 @@ import { TypeOrmConfigFactory } from './type-orm-config.factory';
       useClass: TypeOrmConfigFactory,
     }),
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
