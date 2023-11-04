@@ -21,7 +21,7 @@ export class AppController {
       links: [
         { rel: ['self'], href: this.urls.baseUrl },
         { rel: ['about'], href: this.urls.about, title: 'About' },
-        { rel: ['foo'], href: this.urls.plainText, title: 'Non-Siren' }
+        { rel: ['foo'], class: ['Text'], href: this.urls.plainText, title: 'Non-Siren' }
       ],
       actions: [
         {
@@ -127,6 +127,7 @@ export class AppController {
         },
         {
           name: 'upload-file',
+          class: ['Upload', 'MultipartForm'],
           method: 'POST',
           href: this.urls.upload,
           type: 'multipart/form-data',
