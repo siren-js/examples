@@ -2,69 +2,63 @@
   version="1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="https://alps-io.github.io/schemas/alps.xsd">
-
   <doc>
     This document defines the application semantics for the Kanban Board API.
   </doc>
   
-  <!-- shared descriptors -->
-  <descriptor id="description" type="semantic">
+  <descriptor id="description" type="semantic" tag="property field">
     <doc>Human-readable text describing the work to be done</doc>
   </descriptor>
-  <descriptor id="stage" type="semantic">
+  <descriptor id="stage" type="semantic" tag="property field">
     <doc>Describes where in the process this work item currently is</doc>
   </descriptor>
   <descriptor id="profile"
               type="safe"
-              def="https://www.rfc-editor.org/rfc/rfc6906.html" />
+              def="https://www.rfc-editor.org/rfc/rfc6906.html"
+              tag="link-relation" />
 
-  <!-- entity classes -->
-  <descriptor id="Card">
-    <!-- properties -->
+  <descriptor id="Card" tag="entity">
     <descriptor href="#description" />
     <descriptor href="#stage" />
 
-		<!-- link relations -->
 	  <descriptor id="collection"
 						    type="safe"
 						    rt="#KanbanBoard"
-						    def="https://www.rfc-editor.org/rfc/rfc6573.html" />
-    <descriptor id="blocked-by" type="safe" rt="#Card">
+						    def="https://www.rfc-editor.org/rfc/rfc6573.html"
+                tag="link-relation" />
+    <descriptor id="blocked-by" type="safe" rt="#Card" tag="link-relation">
 		  <doc>Refers to a card that is blocking this card from being completed.</doc>
 		</descriptor>
     <descriptor href="#profile" />
   
-    <!-- actions -->
-	  <descriptor id="move-to-next-stage" type="idempotent" rt="#Card">
+	  <descriptor id="move-to-next-stage" type="idempotent" rt="#Card" tag="action">
 	    <doc>
         Moves the card to the next stage. Only available on cards that are
         not in the last stage.
       </doc>
-	    <!-- fields -->
 	    <descriptor href="#description" />
 	    <descriptor href="#stage" />
 	  </descriptor>
-	  <descriptor id="move-to-previous-stage" type="idempotent" rt="#Card">
+	  <descriptor id="move-to-previous-stage" type="idempotent" rt="#Card" tag="action">
 	    <doc>
         Moves the card to the previous stage. Only available on cards that
         are not in the first stage.
       </doc>
-	    <!-- fields -->
 	    <descriptor href="#description" />
 	    <descriptor href="#stage" />
 	  </descriptor>
   </descriptor>
 
-  <descriptor id="KanbanBoard" type="semantic">
-		<!-- links relations -->
+  <descriptor id="KanbanBoard" type="semantic" tag="entity">
     <descriptor id="item"
                 type="safe"
                 rt="#Card"
-                def="https://www.rfc-editor.org/rfc/rfc6573.html" />
+                def="https://www.rfc-editor.org/rfc/rfc6573.html"
+                tag="link-relation" />
     <descriptor href="#profile" />
 
 		<!-- action names -->
-	  <descriptor id="create-card" type="unsafe" rt="#Card">
+	  <descriptor id="create-card" type="unsafe" rt="#Card" tag="action">
 	    <doc>Creates a new card</doc>
 	    <descriptor href="#description" />
 	    <descriptor href="#stage" />
