@@ -23,6 +23,7 @@ export class CardEntityMapper {
         {
           rel: ['profile'],
           href: this.urlProvider.profile,
+          type: 'application/alps+xml',
         },
       ],
       actions: [
@@ -91,6 +92,7 @@ export class CardEntityMapper {
         {
           rel: ['profile'],
           href: this.urlProvider.profile,
+          type: 'application/alps+xml',
         },
       ],
       actions,
