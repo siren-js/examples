@@ -3,7 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="https://alps-io.github.io/schemas/alps.xsd">
   <doc>
-    This document defines the application semantics for the Kanban Board API.
+    This document defines the application semantics of the Kanban Board API.
   </doc>
   
   <descriptor id="description" type="semantic" tag="property field">
