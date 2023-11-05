@@ -60,7 +60,6 @@
 	  <descriptor id="create-card" type="unsafe" rt="#Card" tag="action">
 	    <doc>Creates a new card</doc>
 	    <descriptor href="#description" />
-	    <descriptor href="#stage" />
 	  </descriptor>
   </descriptor>
 </alps>

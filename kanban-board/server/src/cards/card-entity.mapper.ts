@@ -29,7 +29,7 @@ export class CardEntityMapper {
       actions: [
         {
           title: 'Add Card',
-          name: 'create',
+          name: 'create-card',
           method: 'POST',
           href: this.urlProvider.cards,
           fields: [
