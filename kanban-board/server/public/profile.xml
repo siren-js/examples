@@ -57,7 +57,6 @@
                 tag="link-relation" />
     <descriptor href="#profile" />
 
-		<!-- action names -->
 	  <descriptor id="create-card" type="unsafe" rt="#Card" tag="action">
 	    <doc>Creates a new card</doc>
 	    <descriptor href="#description" />
